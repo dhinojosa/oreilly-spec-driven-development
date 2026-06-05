@@ -42,6 +42,17 @@ Testcontainers, Cucumber, Log4j, SLF4J, jqwik, AssertJ, Jackson, and REST Assure
 The parent POM also pins Maven plugin versions for resources, compiler, Surefire,
 Failsafe, Surefire reports, and project info reports.
 
+## E2E Verification
+
+Browser-level E2E tests live in the `full-application-e2e` module. Select that
+module when you want Selenium browser verification to run:
+
+```bash
+mvn -pl full-application-e2e -am test
+```
+
+Root-level `mvn test` runs the whole reactor, including `full-application-e2e`.
+
 ## Local Application
 
 Start the local Postgres database:

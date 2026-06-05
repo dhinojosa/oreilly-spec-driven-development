@@ -3,10 +3,10 @@ package com.evolutionnext.features.todotoday;
 import com.evolutionnext.AccountApplication;
 import com.evolutionnext.features.account.infrastructure.adapter.out.InMemoryAccountRepository;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.safari.SafariDriver;
@@ -26,8 +26,6 @@ class TodoTodaySeleniumE2ETest {
 
     @BeforeEach
     void startApplication() {
-        Assumptions.assumeTrue(Boolean.parseBoolean(System.getenv().getOrDefault("RUN_UI_E2E", "false")),
-            "Set RUN_UI_E2E=true to run Selenium browser verification");
         server = new AccountApplication().start(0, new InMemoryAccountRepository());
         baseUri = URI.create("http://localhost:" + server.getAddress().getPort());
         browser = new SafariDriver();
@@ -46,34 +44,34 @@ class TodoTodaySeleniumE2ETest {
     @Test
     void browserFlowCanAddEstimateWarnAndCompleteATask() {
         browser.get(baseUri.resolve("/account/register").toString());
-        browser.findElement(By.name("userName")).sendKeys("casey");
-        browser.findElement(By.name("password")).sendKeys("correct-horse-battery-staple");
-        browser.findElement(By.cssSelector("button[type='submit']")).click();
+        waitForElement(By.name("userName")).sendKeys("casey");
+        waitForElement(By.name("password")).sendKeys("correct-horse-battery-staple");
+        waitForElement(By.cssSelector("button[type='submit']")).click();
 
         waitForText("Dashboard");
-        browser.findElement(By.linkText("Todo today page")).click();
-        waitForText("Todo today page");
+        waitForElement(By.linkText("Todo today page")).click();
+        waitForElement(By.name("taskName"));
 
-        browser.findElement(By.name("taskName")).sendKeys("Build conference workshop");
-        browser.findElement(By.cssSelector("form[action='/todo-today/task'] button")).click();
+        waitForElement(By.name("taskName")).sendKeys("Build conference workshop");
+        waitForElement(By.cssSelector("form[action='/todo-today/task'] button")).click();
         waitForText("Build conference workshop");
 
-        var estimateForms = browser.findElements(By.cssSelector("form[action='/todo-today/task/estimate']"));
+        var estimateForms = waitForElements(By.cssSelector("form[action='/todo-today/task/estimate']"));
         estimateForms.get(0).findElement(By.name("estimatedPomodoros")).clear();
         estimateForms.get(0).findElement(By.name("estimatedPomodoros")).sendKeys("7");
         estimateForms.get(0).findElement(By.tagName("button")).click();
         waitForText("Large task warning");
 
-        var completedForms = browser.findElements(By.cssSelector("form[action='/todo-today/task/completed-pomodoros']"));
+        var completedForms = waitForElements(By.cssSelector("form[action='/todo-today/task/completed-pomodoros']"));
         completedForms.get(0).findElement(By.name("completedPomodoros")).clear();
         completedForms.get(0).findElement(By.name("completedPomodoros")).sendKeys("8");
         completedForms.get(0).findElement(By.tagName("button")).click();
         waitForInputValue("form[action='/todo-today/task/completed-pomodoros'] input[name='completedPomodoros']", "8");
 
-        browser.findElement(By.cssSelector("form[action='/todo-today/task/complete'] button")).click();
+        waitForElement(By.cssSelector("form[action='/todo-today/task/complete'] button")).click();
         waitForText("Completed over the estimate");
 
-        var taskCard = browser.findElement(By.cssSelector(".todo-task"));
+        var taskCard = waitForElement(By.cssSelector(".todo-task"));
         assertThat(taskCard.getAttribute("class")).contains("todo-task--complete");
         assertThat(taskCard.getText()).contains("Build conference workshop");
         assertThat(taskCard.getText()).contains("Large task warning");
@@ -86,8 +84,24 @@ class TodoTodaySeleniumE2ETest {
             .until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("body"), text));
     }
 
+    private WebElement waitForElement(By by) {
+        return new WebDriverWait(browser, Duration.ofSeconds(5))
+            .ignoring(StaleElementReferenceException.class)
+            .until(ExpectedConditions.elementToBeClickable(by));
+    }
+
+    private List<WebElement> waitForElements(By by) {
+        return new WebDriverWait(browser, Duration.ofSeconds(5))
+            .ignoring(StaleElementReferenceException.class)
+            .until(driver -> {
+                var elements = driver.findElements(by);
+                return elements.isEmpty() ? null : elements;
+            });
+    }
+
     private void waitForInputValue(String cssSelector, String value) {
         new WebDriverWait(browser, Duration.ofSeconds(5))
+            .ignoring(StaleElementReferenceException.class)
             .until(driver -> value.equals(driver.findElement(By.cssSelector(cssSelector)).getDomProperty("value")));
     }
 
