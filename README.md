@@ -19,7 +19,14 @@ This project is currently being run with:
 - Maven: `4.0.0-rc-5`
 - Build command: `mvn validate`
 
-Use SDKMAN to select the project toolchain:
+Use SDKMAN to select the project toolchain from `.sdkmanrc`:
+
+```bash
+sdk env
+mvn validate
+```
+
+Or select the candidates explicitly:
 
 ```bash
 sdk use java 26-zulu
