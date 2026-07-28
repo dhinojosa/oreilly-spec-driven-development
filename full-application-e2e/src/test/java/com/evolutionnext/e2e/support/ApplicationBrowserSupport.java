@@ -34,6 +34,10 @@ public final class ApplicationBrowserSupport implements AutoCloseable {
         return new LoginPage(browserSupport);
     }
 
+    public void setViewport(int width, int height) {
+        browserSupport.setViewport(width, height);
+    }
+
     @Override
     public void close() {
         if (browser != null) {

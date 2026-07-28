@@ -1,6 +1,7 @@
 package com.evolutionnext.e2e.support;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +31,20 @@ public final class BrowserSupport {
 
     public void open(String path) {
         browser.get(baseUri.resolve(path).toString());
+    }
+
+    public void setViewport(int width, int height) {
+        browser.manage().window().setSize(new Dimension(width, height));
+    }
+
+    public ElementBounds bounds(By selector) {
+        var rectangle = withDiagnostics("element to be visible: " + selector, () ->
+            browserWait()
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOfElementLocated(selector)))
+            .getRect();
+        return new ElementBounds(
+            rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }
 
     public WebElement waitForElement(By selector) {

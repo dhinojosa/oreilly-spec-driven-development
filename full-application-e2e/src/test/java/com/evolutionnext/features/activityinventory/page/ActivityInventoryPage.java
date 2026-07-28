@@ -1,6 +1,7 @@
 package com.evolutionnext.features.activityinventory.page;
 
 import com.evolutionnext.e2e.support.BrowserSupport;
+import com.evolutionnext.e2e.support.WorkspaceLayout;
 import com.evolutionnext.features.account.page.DashboardPage;
 import com.evolutionnext.features.activityinventory.component.ActivityComponent;
 import org.openqa.selenium.By;
@@ -38,5 +39,12 @@ public final class ActivityInventoryPage {
     public DashboardPage openDashboard() {
         browser.waitForElement(By.linkText("Dashboard")).click();
         return new DashboardPage(browser).waitUntilVisible();
+    }
+
+    public WorkspaceLayout workspaceLayout() {
+        return new WorkspaceLayout(
+            browser.bounds(By.className("workspace-layout")),
+            browser.bounds(By.className("workspace-entry")),
+            browser.bounds(By.className("workspace-main")));
     }
 }

@@ -277,6 +277,71 @@ body {
     margin: 1rem 0 0;
 }
 
+.workspace-header {
+    align-items: start;
+    background: var(--pomodoro-surface-muted);
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 1.5rem clamp(1.25rem, 3vw, 3rem);
+}
+
+.workspace-header__copy h1 {
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    line-height: 1;
+    margin: 0;
+}
+
+.workspace-header__copy p:last-child {
+    line-height: 1.5;
+    margin: 0.75rem 0 0;
+}
+
+.workspace-header__actions {
+    align-items: end;
+    display: grid;
+    justify-items: end;
+}
+
+.workspace-header .account-links {
+    justify-content: end;
+    margin-top: 0;
+}
+
+.workspace-layout {
+    box-sizing: border-box;
+    display: grid;
+    gap: clamp(1rem, 2vw, 2rem);
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 3fr);
+    padding: clamp(1rem, 2vw, 2rem) clamp(1.25rem, 3vw, 3rem);
+    width: 100%;
+}
+
+.workspace-entry,
+.workspace-main {
+    border: 1px solid var(--pomodoro-border);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(23, 35, 18, 0.08);
+    min-width: 0;
+    padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.workspace-entry {
+    align-self: start;
+    background: var(--pomodoro-support-soft);
+}
+
+.workspace-main {
+    background: #fffdf8;
+}
+
+.workspace-entry h2,
+.workspace-main h2 {
+    font-size: 1.65rem;
+    line-height: 1.05;
+    margin: 0;
+}
+
 .activity-inventory__list {
     display: grid;
     gap: 0.75rem;
@@ -324,7 +389,8 @@ body {
     gap: 0.45rem;
 }
 
-.account-form input {
+.account-form input,
+.account-form select {
     background: #ffffff;
     border: 1px solid rgba(23, 35, 18, 0.22);
     border-radius: 6px;
@@ -332,7 +398,8 @@ body {
     padding: 0.8rem 0.9rem;
 }
 
-.account-form input:focus-visible {
+.account-form input:focus-visible,
+.account-form select:focus-visible {
     border-color: var(--pomodoro-support);
     outline: 2px solid rgba(37, 95, 42, 0.15);
     outline-offset: 1px;
@@ -485,6 +552,19 @@ body {
 
     .account-shell {
         min-height: auto;
+    }
+
+    .workspace-header,
+    .workspace-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .workspace-header__actions {
+        justify-items: start;
+    }
+
+    .workspace-header .account-links {
+        justify-content: start;
     }
 
     .account-intro {

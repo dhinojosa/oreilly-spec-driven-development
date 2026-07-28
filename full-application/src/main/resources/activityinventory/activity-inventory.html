@@ -6,31 +6,28 @@
     <title>Activity Inventory</title>
     <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body class="account-page">
-<main class="account-shell">
-    <section class="account-intro">
-        <div class="account-intro__content">
+<body class="account-page workspace-page">
+<header class="workspace-header">
+    <div class="workspace-header__copy">
             <p class="account-intro__eyebrow">Authenticated workspace</p>
             <h1>Activity inventory</h1>
             <p>Review the work streams competing for time before committing to the next one.</p>
-            <nav class="account-links" aria-label="Secure navigation">
-                <a href="/dashboard">Dashboard</a>
-                <a href="/todo-today">Todo today page</a>
-                <a href="/record-sheet">Record sheet page</a>
-            </nav>
-            <form class="account-logout" method="get" action="/account/logout">
-                <button type="submit">Log out</button>
-            </form>
-        </div>
-        <div class="account-intro__visual" aria-label="Pomodoro visuals">
-            <img src="/assets/welcome-pomodoro-technique.jpg" alt="Pomodoro Time image">
-            <img src="/assets/welcome-tomato.png" alt="tomato">
-        </div>
-    </section>
+    </div>
+    <div class="workspace-header__actions">
+        <nav class="account-links" aria-label="Secure navigation">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/todo-today">Todo today page</a>
+            <a href="/record-sheet">Record sheet page</a>
+        </nav>
+        <form class="account-logout" method="get" action="/account/logout">
+            <button type="submit">Log out</button>
+        </form>
+    </div>
+</header>
 
-    <section class="account-panel">
-        <div class="account-panel__inner">
-            <h2>Activity inventory page</h2>
+<main class="workspace-layout">
+    <aside class="workspace-entry">
+            <h2>Add an activity</h2>
             <p class="account-panel__lead">Record work that may be selected for the future.</p>
             <form class="account-form activity-inventory__form" method="post"
                   action="/activity-inventory/activity">
@@ -42,11 +39,13 @@
                 </label>
                 <button type="submit">Add activity</button>
             </form>
+    </aside>
+    <section class="workspace-main">
+            <h2>Activity inventory page</h2>
             {{ACTIVITY_EMPTY_STATE}}
             <ul class="activity-inventory__list">
                 {{ACTIVITIES}}
             </ul>
-        </div>
     </section>
 </main>
 </body>
