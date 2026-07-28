@@ -68,7 +68,7 @@ public final class AccountHttpHandler implements HttpHandler {
             form.getOrDefault("password", "")));
         if (result instanceof AccountResult.AccountRegistered(AccountId ignored, String userName)) {
             AuthCookies.rememberAuthenticatedUser(exchange, userName);
-            HttpResponses.html(exchange, 200, resourceLoader.text("account/dashboard.html"));
+            HttpResponses.html(exchange, 200, dashboardPage(userName));
         } else if (result instanceof AccountResult.InvalidRegistration(String userName, String message)) {
             HttpResponses.html(exchange, 422, registrationPage(userName, message));
         } else if (result instanceof AccountResult.UserNameAlreadyExists(String userName)) {
@@ -84,7 +84,7 @@ public final class AccountHttpHandler implements HttpHandler {
             form.getOrDefault("password", "")));
         if (result instanceof AccountResult.LogInSucceeded(AccountId ignored, String userName)) {
             AuthCookies.rememberAuthenticatedUser(exchange, userName);
-            HttpResponses.html(exchange, 200, resourceLoader.text("account/dashboard.html"));
+            HttpResponses.html(exchange, 200, dashboardPage(userName));
         } else {
             HttpResponses.html(exchange, 401, resourceLoader.text("account/anonymous/login-invalid.html"));
         }
@@ -98,6 +98,11 @@ public final class AccountHttpHandler implements HttpHandler {
     private void securePage(HttpExchange exchange, String resourceName) throws IOException {
         if (!AuthCookies.isAuthenticated(exchange)) {
             HttpResponses.html(exchange, 401, resourceLoader.text("welcome/anonymous/index.html"));
+            return;
+        }
+        if ("account/dashboard.html".equals(resourceName)) {
+            var userName = AuthCookies.authenticatedUserName(exchange).orElse("");
+            HttpResponses.html(exchange, 200, dashboardPage(userName));
             return;
         }
         HttpResponses.html(exchange, 200, resourceLoader.text(resourceName));
@@ -138,6 +143,18 @@ public final class AccountHttpHandler implements HttpHandler {
         return resourceLoader.text("account/anonymous/register.html")
             .replace("{{REGISTRATION_FEEDBACK}}", feedback)
             .replace("{{USER_NAME_VALUE}}", escapeHtml(userName));
+    }
+
+    private String dashboardPage(String userName) {
+        return resourceLoader.text("account/dashboard.html")
+            .replace("{{PERSONALIZED_GREETING}}", "Hello, " + escapeHtml(displayName(userName)));
+    }
+
+    private static String displayName(String userName) {
+        if (userName.isBlank()) {
+            return "";
+        }
+        return userName.substring(0, 1).toUpperCase() + userName.substring(1);
     }
 
     private static String escapeHtml(String value) {

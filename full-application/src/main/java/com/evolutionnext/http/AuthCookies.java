@@ -3,6 +3,7 @@ package com.evolutionnext.http;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public final class AuthCookies {
     private AuthCookies() {
@@ -19,9 +20,15 @@ public final class AuthCookies {
     }
 
     public static boolean isAuthenticated(HttpExchange exchange) {
+        return authenticatedUserName(exchange).isPresent();
+    }
+
+    public static Optional<String> authenticatedUserName(HttpExchange exchange) {
         return exchange.getRequestHeaders().getOrDefault("Cookie", java.util.List.of()).stream()
             .flatMap(header -> Arrays.stream(header.split(";")))
             .map(String::trim)
-            .anyMatch(cookie -> cookie.startsWith("account_user=") && !cookie.equals("account_user="));
+            .filter(cookie -> cookie.startsWith("account_user=") && !cookie.equals("account_user="))
+            .map(cookie -> cookie.substring("account_user=".length()))
+            .findFirst();
     }
 }

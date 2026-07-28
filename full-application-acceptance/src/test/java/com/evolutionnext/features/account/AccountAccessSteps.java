@@ -90,6 +90,12 @@ public final class AccountAccessSteps {
         assertThat(state.lastResponse().body()).contains("/record-sheet");
     }
 
+    @Then("the dashboard page shows the personalized greeting {string}")
+    public void dashboardPageShowsPersonalizedGreeting(String greeting) {
+        userIsTakenToDashboardPage();
+        assertThat(state.lastResponse().body()).contains(greeting);
+    }
+
     @Then("the user remains on the login page")
     public void userRemainsOnLoginPage() {
         assertThat(state.lastResponse().statusCode()).isEqualTo(401);

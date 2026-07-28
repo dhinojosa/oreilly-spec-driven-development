@@ -61,6 +61,7 @@ class AccountHttpHandlerTest {
 
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(response.body()).contains("Dashboard");
+        assertThat(response.body()).contains("Hello, Casey");
         assertThat(response.body()).contains("/todo-today");
         assertThat(response.body()).contains("/activity-inventory");
         assertThat(response.body()).contains("/record-sheet");
@@ -76,9 +77,21 @@ class AccountHttpHandlerTest {
 
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(response.body()).contains("Dashboard");
+        assertThat(response.body()).contains("Hello, Casey");
         assertThat(response.body()).contains("/todo-today");
         assertThat(response.body()).contains("/activity-inventory");
         assertThat(response.body()).contains("/record-sheet");
+    }
+
+    @Test
+    void dashboardGreetingUsesAuthenticatedAccountFromCookie() throws Exception {
+        post("/account/register", "userName=riley&password=correct-horse-battery-staple");
+
+        var response = get("/dashboard");
+
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("Hello, Riley");
+        assertThat(response.body()).doesNotContain("Hello, Casey");
     }
 
     @Test

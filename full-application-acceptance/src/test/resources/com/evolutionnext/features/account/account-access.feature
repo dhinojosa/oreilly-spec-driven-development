@@ -49,3 +49,10 @@ Feature: Account access
             | todo today         |
             | activity inventory |
             | record sheet       |
+
+    @ACC-0001-06
+    Scenario: Logged in user sees personalized greeting on the dashboard page
+        Given an account exists for user name "casey" and password "correct-horse-battery-staple"
+        And the user is on the login page
+        When they log in with user name "casey" and password "correct-horse-battery-staple"
+        Then the dashboard page shows the personalized greeting "Hello, Casey"
