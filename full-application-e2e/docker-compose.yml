@@ -1,10 +1,11 @@
 services:
     full-application:
         image: dhinojosa/full-application:${FULL_APPLICATION_VERSION:-1.0-SNAPSHOT}
-        ports:
-            - "8080:8080"
+        expose:
+            - "8080"
         depends_on:
-            - postgres
+            postgres:
+                condition: service_healthy
         environment:
             DATABASE_URL: jdbc:postgresql://postgres:5432/orders
             DATABASE_USERNAME: postgres
@@ -16,6 +17,11 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: orders
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres -d orders"]
+            interval: 1s
+            timeout: 5s
+            retries: 30
         volumes:
             - postgres_data:/var/lib/postgresql/data
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql

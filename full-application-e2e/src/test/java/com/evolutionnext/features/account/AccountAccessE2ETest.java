@@ -1,22 +1,50 @@
 package com.evolutionnext.features.account;
 
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.DockerClientFactory;
+import org.junit.jupiter.api.TestInstance;
+import org.testcontainers.containers.ComposeContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
+
+import java.io.File;
+import java.time.Duration;
 
 import static org.hamcrest.Matchers.equalTo;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AccountAccessE2ETest {
-    @Test
-    void applicationHealthIsAvailableWhenE2EEnvironmentIsRunning() {
-        Assumptions.assumeTrue(Boolean.parseBoolean(System.getenv().getOrDefault("RUN_E2E", "false")),
-            "Set RUN_E2E=true after building the Jib image and starting docker-compose");
-        Assumptions.assumeTrue(DockerClientFactory.instance().isDockerAvailable(),
-            "Docker is required for e2e verification");
+    private static final String APPLICATION_SERVICE = "full-application";
+    private static final int APPLICATION_PORT = 8080;
 
+    private ComposeContainer environment;
+
+    @BeforeAll
+    void startE2EEnvironment() {
+        environment = new ComposeContainer(new File("docker-compose.yml"))
+            .withPull(false)
+            .withExposedService(
+                APPLICATION_SERVICE,
+                APPLICATION_PORT,
+                Wait.forHttp("/health")
+                    .forStatusCode(200)
+                    .withStartupTimeout(Duration.ofSeconds(60)));
+        environment.start();
+    }
+
+    @AfterAll
+    void stopE2EEnvironment() {
+        if (environment != null) {
+            environment.stop();
+        }
+    }
+
+    @Test
+    void applicationHealthIsAvailable() {
         RestAssured.given()
-            .baseUri(System.getenv().getOrDefault("E2E_BASE_URI", "http://localhost:8080"))
+            .baseUri("http://" + environment.getServiceHost(APPLICATION_SERVICE, APPLICATION_PORT))
+            .port(environment.getServicePort(APPLICATION_SERVICE, APPLICATION_PORT))
             .when()
             .get("/health")
             .then()

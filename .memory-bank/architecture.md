@@ -520,9 +520,8 @@ Use:
 - version: `3.4.6`
 - execution phase: `package`
 - goal: `build`
-- base image: an OpenJDK slim Bookworm image matching the application's Java
-  version, such as `openjdk:26-slim-bookworm` for Java 26 or
-  `openjdk:25-ea-slim-bookworm` for Java 25
+- base image: a current multi-architecture Java runtime image matching the
+  application's Java version, such as `eclipse-temurin:26-jre` for Java 26
 - target image: `dhinojosa/full-application:${project.version}`
 - main class: `com.evolutionnext.Runner`
 - JVM flag: `--enable-preview`

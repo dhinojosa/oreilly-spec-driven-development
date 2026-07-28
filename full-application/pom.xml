@@ -78,7 +78,7 @@
                 <configuration>
                     <skip>${jib.skip}</skip>
                     <from>
-                        <image>openjdk:26-slim-bookworm</image>
+                        <image>eclipse-temurin:26-jre</image>
                         <platforms>
                             <platform>
                                 <architecture>amd64</architecture>
