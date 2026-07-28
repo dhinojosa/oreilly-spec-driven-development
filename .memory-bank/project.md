@@ -16,6 +16,9 @@ feature delivery.
 - Maintain shared domain terms in `.memory-bank/ubiquitous-language.md`.
 - Keep tests, classes, specs, routes, handlers, and user-facing copy aligned to
   the ubiquitous language.
+- Prefer Java testing tools for verifying Java application behavior.
+- Prefer Maven for compiling and running verification.
+- Use the existing test suite before creating an extra verification test.
 - Treat a delivery as complete only when it is test-complete for the implemented
   slice.
 - When a feature includes browser-visible behavior that matters to the user,

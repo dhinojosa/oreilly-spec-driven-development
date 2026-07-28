@@ -146,6 +146,49 @@ The user may ask to implement:
 When the work is complete, update the task file checkboxes and report the
 validation performed.
 
+## Agent Verification Procedure
+
+The five-minute limit begins when work becomes stuck, not when the whole task
+begins. Repeated failures, unclear requirements, unavailable tools, and
+uncertain workarounds are signs that work may be stuck.
+
+If clear progress is not made within five minutes:
+
+1. Stop the current approach.
+2. Report what was attempted and what failed.
+3. State what decision or information is needed.
+4. Ask the user for direction before trying another approach.
+
+Do not hide a difficulty with an unrelated workaround. A command running
+normally for more than five minutes is not automatically stuck; continue to
+report its progress.
+
+Prefer Java testing tools for verifying Java application behavior. Prefer Maven
+for compiling and running verification. Use the existing test suite before
+creating an extra verification test.
+
+Do not create Python scripts, replacement modules, or other shims in `/tmp`,
+`/private/tmp`, or another temporary directory to imitate missing project
+tools.
+
+Tests created only to verify the agent's work belong under:
+
+```text
+com.evolutionnext.aiverify.<feature>
+```
+
+For example:
+
+```text
+com.evolutionnext.aiverify.account
+com.evolutionnext.aiverify.todotoday
+```
+
+Run `aiverify` tests through Maven like other Java tests. Keep required domain,
+application, repository, controller, acceptance, API, and UI tests in their
+normal feature packages. An `aiverify` test does not replace a test required by
+an ACC or TECH task.
+
 ## Validation Rule
 
 For every implementation change, run the full available Maven verification suite

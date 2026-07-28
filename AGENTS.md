@@ -30,6 +30,29 @@ Before making feature changes, read:
   waiting in Page Objects, Page Components, or shared browser support.
 - Keep the user flow and checks of expected results in the UI test.
 
+## Stuck Work And Verification
+
+- The five-minute limit begins when work becomes stuck, not when the whole task
+  begins.
+- Repeated failures, unclear requirements, unavailable tools, or uncertain
+  workarounds mean the work may be stuck.
+- If clear progress is not made within five minutes, stop, report what was
+  attempted and what failed, and ask the user for direction before trying
+  another approach.
+- Do not hide a difficulty with an unrelated workaround.
+- A command running normally for more than five minutes is not automatically
+  stuck; continue to report its progress.
+- Prefer Java testing tools for verifying Java application behavior, and prefer
+  Maven for compiling and running verification.
+- Use the existing test suite before creating an extra verification test.
+- Do not create Python scripts, replacement modules, or other shims in `/tmp`,
+  `/private/tmp`, or another temporary directory to imitate missing project
+  tools.
+- Put tests created only to verify the agent's work under
+  `com.evolutionnext.aiverify.<feature>`.
+- Keep tests required by ACC and TECH tasks in their normal feature packages;
+  `aiverify` tests do not replace them.
+
 ## Build
 
 Use SDKMAN:
