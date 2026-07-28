@@ -24,7 +24,11 @@ Before making feature changes, read:
 - Implement features as vertical slices through the relevant modules.
 - Mark completed task checkboxes when work is done.
 - Do not treat a feature as complete unless the slice is test-complete.
-- When the feature's behavior is visible in the browser, include browser-level UI verification before calling the slice complete unless the user explicitly accepts the gap.
+- When behavior is visible in the browser, test it through Page Objects before
+  calling the slice complete unless the user explicitly accepts the gap.
+- Keep Selenium selectors, form entry, button clicks, navigation, and browser
+  waiting in Page Objects, Page Components, or shared browser support.
+- Keep the user flow and checks of expected results in the UI test.
 
 ## Build
 

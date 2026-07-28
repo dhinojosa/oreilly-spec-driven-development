@@ -115,5 +115,5 @@ the user explicitly asks for that.
 
 A vertical slice is not complete unless the verification is complete for that
 slice. When the business behavior is visible in the browser, completion
-requires browser-level UI verification in addition to domain, application,
-controller, and acceptance coverage.
+requires browser-level UI verification through Page Objects in addition to
+domain, application, controller, and acceptance coverage.

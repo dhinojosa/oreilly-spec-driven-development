@@ -467,6 +467,17 @@ End-to-end tests should use Testcontainers and REST Assured for HTTP-facing
 verification. Use jqwik with them when generated inputs add meaningful coverage.
 Use Selenium when browser-level behavior is part of the business flow.
 
+Selenium UI tests must interact with pages through Page Objects:
+
+- Keep selectors, form entry, button clicks, navigation, and browser waiting in
+  Page Objects, Page Components, or shared browser support.
+- Keep the user flow and checks of expected results in the UI test.
+- Name Page Object methods after what a user does or sees, such as `register`,
+  `logIn`, `openTodoToday`, or `greetingText`.
+- Wait for a specific page, element, text, or result instead of pausing for an
+  arbitrary amount of time.
+- Use Page Components for repeated page sections that have their own behavior.
+
 The e2e Docker Compose file should follow this shape:
 
 ```yaml

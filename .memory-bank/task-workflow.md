@@ -102,7 +102,11 @@ Docker Compose file, optional `init.sql`, and Testcontainers/REST Assured,
 jqwik, or Selenium tests as appropriate.
 
 When a feature's behavior is visible in the browser, the E2E Testing section
-must include browser-level UI verification, normally with Selenium.
+must include browser-level UI verification with Selenium through Page Objects.
+The plan must identify the Page Objects or Page Components that will be created
+or updated. Keep the user flow and checks of expected results in the UI test,
+and keep selectors, page interaction, and browser waiting in Page Objects, Page
+Components, or shared browser support.
 
 If a category does not apply to a feature, keep the category visible and explain
 why it is unnecessary for that feature.
@@ -168,5 +172,5 @@ are complete, or the remaining validation gap is explicitly recorded.
 
 Do not describe a governed feature as executed or delivered if an applicable
 test layer is still missing. If the feature includes browser-visible behavior,
-the E2E Testing section remains open until browser-level verification is
-implemented or the gap is explicitly accepted by the user.
+the E2E Testing section remains open until Page Object-based browser
+verification is implemented or the gap is explicitly accepted by the user.

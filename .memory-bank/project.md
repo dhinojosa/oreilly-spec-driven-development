@@ -19,7 +19,8 @@ feature delivery.
 - Treat a delivery as complete only when it is test-complete for the implemented
   slice.
 - When a feature includes browser-visible behavior that matters to the user,
-  include browser-level UI verification in addition to lower-level tests.
+  include browser-level UI verification through Page Objects in addition to
+  lower-level tests.
 
 ## Web Application Constraints
 
