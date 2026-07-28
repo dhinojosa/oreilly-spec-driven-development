@@ -18,6 +18,10 @@ public final class ApplicationBrowserSupport implements AutoCloseable {
     public void start() {
         server = new AccountApplication().start(0, new InMemoryAccountRepository());
         var baseUri = URI.create("http://localhost:" + server.getAddress().getPort());
+        start(baseUri);
+    }
+
+    public void start(URI baseUri) {
         browser = new SafariDriver();
         browserSupport = new BrowserSupport(browser, baseUri);
     }

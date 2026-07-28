@@ -29,6 +29,13 @@ that depends on it.
 - `todo today page`: an authenticated destination page
 - `activity inventory page`: an authenticated destination page
 - `record sheet page`: an authenticated destination page
+- `activity inventory`: a logged-in user's saved collection of activities that
+  may be selected for future work
+- `activity`: work recorded in the activity inventory for possible future
+  selection; it is not a Todo Today item
+- `priority`: the importance assigned to an activity
+- `high priority`: the priority used for an activity that should receive early
+  attention
 
 ## Naming Guidance
 

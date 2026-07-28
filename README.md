@@ -5,6 +5,14 @@ This project is for spec-driven-development.
 It is a Maven multi-module project organized around a full application and
 separate verification layers.
 
+## Introduction Questions
+
+1. Where do you work? What time zone are you in? 
+2. What is your experience with AI?
+   a. Who is your goto AI? Claude, ChatGPT, Copilot, Gemini.
+3. What is your experience with Java?
+4. What do you like to do for Zen? Cycling, Games, Sewing, Gardening, Hiking, Kids, ...
+
 ## Modules
 
 - `full-application`

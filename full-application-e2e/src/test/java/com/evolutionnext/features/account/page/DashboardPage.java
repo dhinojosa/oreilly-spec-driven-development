@@ -1,17 +1,18 @@
 package com.evolutionnext.features.account.page;
 
 import com.evolutionnext.e2e.support.BrowserSupport;
+import com.evolutionnext.features.activityinventory.page.ActivityInventoryPage;
 import com.evolutionnext.features.todotoday.page.TodoTodayPage;
 import org.openqa.selenium.By;
 
 public final class DashboardPage {
     private final BrowserSupport browser;
 
-    DashboardPage(BrowserSupport browser) {
+    public DashboardPage(BrowserSupport browser) {
         this.browser = browser;
     }
 
-    DashboardPage waitUntilVisible() {
+    public DashboardPage waitUntilVisible() {
         browser.waitForText("Dashboard");
         return this;
     }
@@ -29,5 +30,10 @@ public final class DashboardPage {
     public TodoTodayPage openTodoToday() {
         browser.waitForElement(By.linkText("Todo today page")).click();
         return new TodoTodayPage(browser).waitUntilVisible();
+    }
+
+    public ActivityInventoryPage openActivityInventory() {
+        browser.waitForElement(By.linkText("Activity inventory page")).click();
+        return new ActivityInventoryPage(browser).waitUntilVisible();
     }
 }

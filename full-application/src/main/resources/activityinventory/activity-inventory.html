@@ -31,7 +31,21 @@
     <section class="account-panel">
         <div class="account-panel__inner">
             <h2>Activity inventory page</h2>
-            <p class="account-panel__lead">Keep the inventory visible so the dashboard leads somewhere concrete.</p>
+            <p class="account-panel__lead">Record work that may be selected for the future.</p>
+            <form class="account-form activity-inventory__form" method="post"
+                  action="/activity-inventory/activity">
+                <label>Activity name <input name="activityName" autocomplete="off"></label>
+                <label>Priority
+                    <select name="priority">
+                        <option value="HIGH">High priority</option>
+                    </select>
+                </label>
+                <button type="submit">Add activity</button>
+            </form>
+            {{ACTIVITY_EMPTY_STATE}}
+            <ul class="activity-inventory__list">
+                {{ACTIVITIES}}
+            </ul>
         </div>
     </section>
 </main>

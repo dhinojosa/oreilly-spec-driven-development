@@ -46,8 +46,6 @@ public final class AccountHttpHandler implements HttpHandler {
             securePage(exchange, "account/dashboard.html");
         } else if ("GET".equals(method) && "/todo-today".equals(path)) {
             securePage(exchange, "account/todo-today.html");
-        } else if ("GET".equals(method) && "/activity-inventory".equals(path)) {
-            securePage(exchange, "account/activity-inventory.html");
         } else if ("GET".equals(method) && "/record-sheet".equals(path)) {
             securePage(exchange, "account/record-sheet.html");
         } else if ("GET".equals(method) && "/account/logout".equals(path)) {
