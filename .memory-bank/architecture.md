@@ -594,12 +594,10 @@ Keep the dependency direction clear:
 Use architecture tests in `full-application` to enforce the hexagonal and DDD
 boundaries.
 
-The project should keep the latest ArchUnit dependency available. As of
-ArchUnit `1.4.1`, ArchUnit imports class files through Java 25, while this
-project compiles Java 26 class files. Until ArchUnit supports Java 26 bytecode
-directly, enforce the same rules with JDK tooling such as `jdeps` and
-reflection from the architecture test class. Document that exception in the
-test class.
+The project should keep the latest ArchUnit dependency available. ArchUnit
+`1.4.2` supports Java 26 class files, so new architecture rules can use ArchUnit
+directly. Existing rules implemented with JDK tooling such as `jdeps` and
+reflection may remain until a task explicitly replaces them.
 
 Architecture rules should cover:
 
