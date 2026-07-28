@@ -8,7 +8,7 @@ feature delivery.
 
 ## Project Preferences
 
-- Keep durable context in `.memory-bank/`.
+- Keep a durable context in `.memory-bank/`.
 - Keep executable task plans in `.ai-tasks/`.
 - Reserve `docs/` for future user-facing or project documentation.
 - Prefer small, explicit changes.
