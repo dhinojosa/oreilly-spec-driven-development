@@ -1,4 +1,4 @@
-package com.evolutionnext.features.activityinventory;
+package com.evolutionnext.feature.activityinventory;
 
 import com.evolutionnext.AccountApplication;
 import com.evolutionnext.features.account.infrastructure.adapter.out.InMemoryAccountRepository;

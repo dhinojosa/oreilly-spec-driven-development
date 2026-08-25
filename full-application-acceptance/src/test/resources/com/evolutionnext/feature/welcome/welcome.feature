@@ -3,7 +3,7 @@ Feature: Welcome Page
     I want to see a welcome page when I visit the website
     So that I know I'm on the Pomodoro Time application
 
-    @ACC-0002
+@ACC-0002
     Scenario: Anonymous user visits the website
         Given I am an anonymous user
         When I navigate to the home page

@@ -1,4 +1,4 @@
-package com.evolutionnext.features.todotoday;
+package com.evolutionnext.feature.todotoday;
 
 import com.sun.net.httpserver.HttpServer;
 import io.cucumber.guice.ScenarioScoped;

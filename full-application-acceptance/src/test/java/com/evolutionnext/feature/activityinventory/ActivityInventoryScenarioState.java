@@ -1,4 +1,4 @@
-package com.evolutionnext.features.welcome;
+package com.evolutionnext.feature.activityinventory;
 
 import com.sun.net.httpserver.HttpServer;
 import io.cucumber.guice.ScenarioScoped;
@@ -7,10 +7,11 @@ import java.net.URI;
 import java.net.http.HttpResponse;
 
 @ScenarioScoped
-public final class WelcomeScenarioState {
+public final class ActivityInventoryScenarioState {
     private HttpServer server;
     private URI baseUri;
     private HttpResponse<String> lastResponse;
+    private String authenticationCookie;
 
     public void rememberServer(HttpServer server) {
         this.server = server;
@@ -27,6 +28,14 @@ public final class WelcomeScenarioState {
 
     public HttpResponse<String> lastResponse() {
         return lastResponse;
+    }
+
+    public void rememberAuthenticationCookie(String authenticationCookie) {
+        this.authenticationCookie = authenticationCookie;
+    }
+
+    public String authenticationCookie() {
+        return authenticationCookie;
     }
 
     public void stopServer() {

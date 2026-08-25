@@ -1,4 +1,4 @@
-package com.evolutionnext.features.todotoday;
+package com.evolutionnext.feature.todotoday;
 
 import com.evolutionnext.AccountApplication;
 import com.evolutionnext.features.account.infrastructure.adapter.out.InMemoryAccountRepository;

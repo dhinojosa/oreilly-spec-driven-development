@@ -1,4 +1,4 @@
-package com.evolutionnext.features.activityinventory;
+package com.evolutionnext.feature.account;
 
 import com.sun.net.httpserver.HttpServer;
 import io.cucumber.guice.ScenarioScoped;
@@ -7,10 +7,11 @@ import java.net.URI;
 import java.net.http.HttpResponse;
 
 @ScenarioScoped
-public final class ActivityInventoryScenarioState {
+public final class AccountScenarioState {
     private HttpServer server;
     private URI baseUri;
     private HttpResponse<String> lastResponse;
+    private String lastUserName;
     private String authenticationCookie;
 
     public void rememberServer(HttpServer server) {
@@ -30,12 +31,24 @@ public final class ActivityInventoryScenarioState {
         return lastResponse;
     }
 
+    public void rememberLastUserName(String lastUserName) {
+        this.lastUserName = lastUserName;
+    }
+
+    public String lastUserName() {
+        return lastUserName;
+    }
+
     public void rememberAuthenticationCookie(String authenticationCookie) {
         this.authenticationCookie = authenticationCookie;
     }
 
     public String authenticationCookie() {
         return authenticationCookie;
+    }
+
+    public void clearAuthenticationCookie() {
+        this.authenticationCookie = null;
     }
 
     public void stopServer() {

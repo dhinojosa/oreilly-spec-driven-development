@@ -1,4 +1,4 @@
-package com.evolutionnext.features.welcome;
+package com.evolutionnext.feature.welcome;
 
 import com.evolutionnext.AccountApplication;
 import com.evolutionnext.features.account.infrastructure.adapter.out.InMemoryAccountRepository;
