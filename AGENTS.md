@@ -55,11 +55,11 @@ Before making feature changes, read:
 
 ## Build
 
-Use SDKMAN:
+Use SDKMAN and prefer the repository's `.sdkmanrc` through `sdk env` so agents
+and students use the same configured toolchain:
 
 ```bash
-sdk use java 26-zulu
-sdk use maven 4.0.0-rc-5
+sdk env
 mvn validate
 ```
 

@@ -55,7 +55,7 @@ Root-level `mvn test` runs the whole reactor, including `full-application-e2e`.
 
 ## Run And Try The Application
 
-Select Java 26 and Maven 4 as described above, and make sure Docker is running.
+Select Java 26 and Maven 4 as described above and make sure Docker is running.
 
 First, use Jib to build the complete application image in the local Docker
 engine. Choose the command for your computer.
