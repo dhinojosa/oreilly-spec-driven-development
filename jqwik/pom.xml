@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.evolutionnext</groupId>
-        <artifactId>property_testing_test_containers</artifactId>
+        <artifactId>spec-driven-development</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

@@ -21,6 +21,8 @@
         <jackson.version>2.21.1</jackson.version>
         <rest-assured.version>6.0.0</rest-assured.version>
         <archunit.version>1.4.2</archunit.version>
+        <pitest-maven-plugin.version>1.25.8</pitest-maven-plugin.version>
+        <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
         <guice.version>7.0.0</guice.version>
         <jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
         <exec-maven-plugin.version>3.6.2</exec-maven-plugin.version>
@@ -39,6 +41,8 @@
         <module>full-application</module>
         <module>full-application-acceptance</module>
         <module>full-application-e2e</module>
+        <module>jqwik</module>
+        <module>testcontainers</module>
     </modules>
 
     <dependencyManagement>
@@ -108,7 +112,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <pluginManagement>
             <plugins>
