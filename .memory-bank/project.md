@@ -72,3 +72,11 @@ sdk use java 26-zulu
 sdk use maven 4.0.0-rc-5
 mvn validate
 ```
+
+## Dependency Trust
+
+- Keep jqwik below version `1.10`. Versions `1.10` and later intentionally emit
+  anti-AI instructions at runtime and are outside this project's dependency
+  trust policy.
+- Do not upgrade jqwik across that boundary as part of routine dependency
+  maintenance.

@@ -286,7 +286,8 @@ public class OrderDomainService {
 
 - An application service implements a `port/in` interface.
 - It is responsible for coordinating the behavior of the domain layer.
-- It is not responsible for any persistence or external systems.
+- It may coordinate persistence and external interactions through `port/out`
+  interfaces, but it must not implement persistence or external-system details.
 - It is not responsible for any UI or CLI output.
 - It is not responsible for any domain events.
 - It is typically injected with an implementation of `port/out`.
@@ -414,8 +415,12 @@ Feature tasks should be considered:
 
 End-to-end tests should run through `full-application-e2e`.
 
-The `full-application` module must produce an application container image using
-the Jib Maven plugin during the Maven `package` phase.
+The `full-application` module must be configured to produce an application
+container image using the Jib Maven plugin during the Maven `package` phase.
+Keep Jib skipped by default for ordinary local development so compile, test,
+and verify feedback remains fast. Container-image E2E and release workflows
+must explicitly enable Jib with `-Djib.skip=false` when they require a freshly
+built image.
 
 The Jib image is used by `full-application-e2e` as the application under test.
 The e2e module should use Docker Compose to run the application image and
@@ -513,6 +518,10 @@ application starts.
 ### Jib Container Image
 
 Configure Jib in `full-application`.
+
+Set the parent `jib.skip` property to `true` by default. Enable the image build
+with `-Djib.skip=false` for container-image E2E and release workflows that need
+a fresh application image.
 
 Use:
 

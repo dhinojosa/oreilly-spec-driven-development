@@ -30,8 +30,10 @@ Example:
 
 Use `ACC-####` for business-facing acceptance tasks governed by Cucumber specs.
 
-Use `TECH-####` for technical tasks that are not directly tied to business
-behavior.
+Use `TECH-####` for technical work that is not directly tied to business
+behavior and needs a durable plan. Small, direct technical corrections do not
+require a TECH task unless the user requests one or the work needs multi-step
+planning and tracking.
 
 `ACC-####` tasks must reference a matching Cucumber tag, such as `@ACC-0001`.
 

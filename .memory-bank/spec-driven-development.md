@@ -83,8 +83,10 @@ The task file contains the implementation plan as markdown checkboxes.
 
 Business behavior must be driven by Cucumber specs and `ACC-####` identifiers.
 
-Technical work may use `TECH-####` identifiers when no business behavior is
-being specified.
+Technical work that needs a durable plan may use `TECH-####` identifiers when
+no business behavior is being specified. Small, direct technical corrections
+do not require a TECH task unless the user asks for one or the work needs to be
+planned and tracked across multiple actions.
 
 Technical tasks must not introduce business behavior unless a Cucumber spec is
 added.
